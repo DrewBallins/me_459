@@ -10,4 +10,3 @@ f.write("Andrew Wild")
 
 "Finally I close the text file"
 f.close
-
