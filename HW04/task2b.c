@@ -11,8 +11,8 @@ int main(int argc, char **argv) {
 	int n = atoi(argv[1]);
 
 	// check that n is >= 0, if not re-prompt for input
-	if (n < 0) {
-		printf("Your number is < 0, please input integer from 0 to 100 next time.\n");
+	if (n <= 0) {
+		printf("Your number is < 0 or = 0, please input positive integer next time.\n");
 		exit(0);
 	}
 
