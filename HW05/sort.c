@@ -1,6 +1,7 @@
 // ME 459 HW05 sort
 // Author: Andrew Wild
-// This c program implements bubble sort to sort the elemnts of an array in ascending order
+// This c file implements a bubble sort function to 
+// sort the elements of an array in ascending order
 
 #include <stdio.h>
 #include "sort.h"
