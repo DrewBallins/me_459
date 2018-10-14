@@ -10,7 +10,7 @@
 #SBATCH --partition=slurm_shortgpu
 #SBATCH --ntasks=1 --cpus-per-task=1
 #SBATCH --time=0-00:00:10
-#SBATCH --output="task3_output-%j.txt"
+#SBATCH --output="task5_output-%j.txt"
 
 # Load latest GCC module then compile and execute program
 module load gcc/latest
