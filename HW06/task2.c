@@ -1,6 +1,8 @@
 // ME 459 HW06 task2
 // Author: Andrew Wild
-// This c program 
+// This c program calls function randomT2 to make a random 1000x1000 matrix A and multiplies
+// it by a length 1000 vector b to create a vector c. It then finds the norm-two of this
+// vector c and also clocks the calculation time required to run the program.
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -8,7 +10,7 @@
 #include <math.h>
 #include "output.h"
 
-int main(int argc, char **argv) {
+int main() {
 	clock_t start, end;		// initialize start and end values returned by clock function
 	double cpu_time_used;	// initialize double for CPU time used
 
@@ -36,7 +38,7 @@ int main(int argc, char **argv) {
 
 	double c[1000];			// create array c to store solution of A*b
 
-	// multiplying A*b and placing values in c vector
+	// multiplying A*b row-wise and placing values in c vector
 	for(int k=0; k<1000; k++) {
 		for(int l=0; l<1000; l++) {
 			c[k] = c[k] + A[k*1000 + l]*b[l];
