@@ -12,10 +12,7 @@ int main(int argc, char* argv[]) {
 
     // check input for validity and set it to an unsigned int DIM
     if( argc == 2 ) {
-        clock_t start, end;     // initialize start and end values returned by clock function
-        double cpu_time_used;   // initialize double for CPU time used
 
-        start = clock();        // clock function used to find start time
         /* Do the work. */
 
         // n is the 'size' of matrix A
@@ -43,6 +40,10 @@ int main(int argc, char* argv[]) {
                 b[i] = -0.5;
             }
         }
+
+        clock_t start, end;     // initialize start and end values returned by clock function
+        double cpu_time_used;   // initialize double for CPU time used
+        start = clock();        // clock function used to find start time
 
         // Multiply: c = Ab
         for (size_t i = 0; i < DIM; i++) {
