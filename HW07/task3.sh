@@ -11,6 +11,8 @@
 #SBATCH --time=0-00:00:10
 #SBATCH --output="task3_output-%j.txt"
 
+cd $SLURM_SUBMIT_DIR
+
 # Load latest GCC module then compile and execute program
 module load gcc/latest
 gcc driver3.c sort.c verify.c -o driver3
