@@ -44,7 +44,7 @@ int main(int argc, char* argv[]) {
 
     end = clock();          // clock function used to find end time
     // calculate the CPU time used during the program execution
-    cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
+    cpu_time_used = ((double) (end - start)) / (CLOCKS_PER_SEC/1000);
 
     // Output the elapsed time of the sorting algorithm
     printf("elapsed time: %f ms\n", cpu_time_used);    

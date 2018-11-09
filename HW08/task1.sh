@@ -13,9 +13,10 @@
 
 cd $SLURM_SUBMIT_DIR
 
-# Load latest GCC module then compile and execute program
+# Load latest GCC module then compile using cmake
 module load gcc/latest
-gcc task1.c -o task1
+cmake .
+make
 
 # Make a new text file called task1_data.txt 
 echo 'size;elapsed time [ms]' > task1_data.txt
