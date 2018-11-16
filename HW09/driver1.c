@@ -23,8 +23,8 @@ int main(int argc, char* argv[]) {
     clock_t start = clock();
     unsigned int n_collisions = collide_all_spheres(R, pts, n_spheres);
     clock_t end = clock();
-    const double ms2s = 1000.0;
-    double total_time = ((double)(end - start)) / CLOCKS_PER_SEC * ms2s;
+    const double s2ms = 1000.0;
+    double total_time = ((double)(end - start)) / CLOCKS_PER_SEC * s2ms;
 
     // Output results
     printf("Number of spheres: %u\n", n_spheres);
