@@ -20,13 +20,12 @@ void read_mesh(triangle *mesh, FILE *f_mesh) {
 		   	char *coord = strtok(line,",");
 	   		while(coord != NULL) {
 	   			coords[k] = strtod(coord, &ptr);
-	   			printf("Triangle %d Node %d Coord %d = %f\n", j, i, k+1, coords[k]);
 	   			coord = strtok(NULL,",");
 	   			k += 1;
 	   		}
-	   		//mesh[j].x1 = coords[0];
-	   		//mesh[j].y1 = coords[1];
-	   		//mesh[j].z1 = coords[2];
+	   		mesh[j].x1 = coords[0];
+	   		mesh[j].y1 = coords[1];
+	   		mesh[j].z1 = coords[2];
 	   		i += 1;
 		}
 		else if(i==2) {
@@ -34,13 +33,12 @@ void read_mesh(triangle *mesh, FILE *f_mesh) {
 			char *coord = strtok(line,",");
 	   		while(coord != NULL) {
 	   			coords[k] = strtod(coord, &ptr);
-	   			printf("Triangle %d Node %d Coord %d = %f\n", j, i, k+1, coords[k]);
 	   			coord = strtok(NULL,",");
 	   			k += 1;
 	   		}
-	   		//mesh[j].x2 = coords[0];
-	   		//mesh[j].y2 = coords[1];
-	   		//mesh[j].z2 = coords[2];
+	   		mesh[j].x2 = coords[0];
+	   		mesh[j].y2 = coords[1];
+	   		mesh[j].z2 = coords[2];
 	   		i += 1;
 		}
 		else if(i==3) {
@@ -48,13 +46,12 @@ void read_mesh(triangle *mesh, FILE *f_mesh) {
 			char *coord = strtok(line,",");
 	   		while(coord != NULL) {
 	   			coords[k] = strtod(coord, &ptr);
-	   			printf("Triangle %d Node %d Coord %d = %f\n", j, i, k+1, coords[k]);
 	   			coord = strtok(NULL,",");
 	   			k += 1;
 	   		}
-	   		//mesh[j].x2 = coords[0];
-	   		//mesh[j].y2 = coords[1];
-	   		//mesh[j].z2 = coords[2];
+	   		mesh[j].x3 = coords[0];
+	   		mesh[j].y3 = coords[1];
+	   		mesh[j].z3 = coords[2];
 	   		i = 1;
 	   		j += 1;
 		}
