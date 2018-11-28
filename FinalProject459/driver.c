@@ -17,6 +17,26 @@ int main() {
 	read_mesh(mesh, f_mesh);			// call function to read mesh.input and populate mesh array of triangles
 
 	fclose(f_mesh);
+
+	printf("Triangle 1 x1 = %f\n", mesh[0].x1);
+	printf("Triangle 1 y1 = %f\n", mesh[0].y1);
+	printf("Triangle 1 z1 = %f\n", mesh[0].z1);
+	printf("Triangle 1 x2 = %f\n", mesh[0].x2);
+	printf("Triangle 1 y2 = %f\n", mesh[0].y2);
+	printf("Triangle 1 z2 = %f\n", mesh[0].z2);
+	printf("Triangle 1 x3 = %f\n", mesh[0].x3);
+	printf("Triangle 1 y3 = %f\n", mesh[0].y3);
+	printf("Triangle 1 z3 = %f\n", mesh[0].z3);
+	printf("Triangle 1 x1 = %f\n", mesh[1].x1);
+	printf("Triangle 1 y1 = %f\n", mesh[1].y1);
+	printf("Triangle 1 z1 = %f\n", mesh[1].z1);
+	printf("Triangle 1 x2 = %f\n", mesh[1].x2);
+	printf("Triangle 1 y2 = %f\n", mesh[1].y2);
+	printf("Triangle 1 z2 = %f\n", mesh[1].z2);
+	printf("Triangle 1 x3 = %f\n", mesh[1].x3);
+	printf("Triangle 1 y3 = %f\n", mesh[1].y3);
+	printf("Triangle 1 z3 = %f\n", mesh[1].z3);
+
 	free(mesh);
     return 0;
 }
