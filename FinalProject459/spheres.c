@@ -44,12 +44,12 @@ void read_spheres(sphere *spheres, FILE *f_spheres) {
    	// Sphere coordinate loop
 	while ((nread = getline(&line, &len, f_spheres)) != -1) {
 		unsigned int k = 0;		// counter for coordinate reading
-		char *coord = strtok(line,",");	// separate out first file item
+		char *coord = strtok(line,",");	// separate out first coordinate
    		
-   		// loop through each file item on given line
+   		// loop through each coordinate on given line
    		while(coord != NULL) {
    			coords[k] = strtod(coord, &ptr);	// convert to double & save to coords array
-   			coord = strtok(NULL,",");	// separate next item
+   			coord = strtok(NULL,",");	// separate next coordinate
    			k += 1;
    		}
    		spheres[j].x = coords[0];	// save x coordinate of sphere j
