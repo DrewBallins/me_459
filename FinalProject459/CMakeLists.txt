@@ -1,6 +1,8 @@
 cmake_minimum_required (VERSION 2.8)
 project(FinalProject)
 
-# Generate the executables associated with the ME459 Final Project
+# Generate the executable associated with the ME459 Final Project
+add_executable(final driver.c mesh.c spheres.c)
 
+# Set necessary GCC compiler flags
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -lm")
