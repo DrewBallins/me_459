@@ -14,7 +14,7 @@ typedef struct triangle {
     double z3;
 } triangle;
 
-// Reads mesh.input file and saves all triangles in array
+// Reads mesh.input file and saves all triangles in mesh array
 void read_mesh(triangle *mesh, FILE *f_mesh);
 
 #endif
