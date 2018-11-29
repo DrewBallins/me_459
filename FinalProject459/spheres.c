@@ -44,9 +44,7 @@ void read_spheres(sphere *spheres, FILE *f_spheres) {
 		unsigned int k = 0;
 		char *coord = strtok(line,",");
    		while(coord != NULL) {
-   			printf("Sphere %d str coord %d = %s\n", j, k, coord);
    			coords[k] = strtod(coord, &ptr);
-   			printf("Sphere %d double coord %d = %f\n", j, k, coords[k]);
    			coord = strtok(NULL,",");
    			k += 1;
    		}
