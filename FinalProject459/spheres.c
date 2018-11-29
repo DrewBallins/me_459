@@ -11,7 +11,7 @@ void read_sphere_data(FILE *f_spheres, double *r, unsigned long int *num_s) {
 	char *ptr;			// initialize endchar: ptr for strtod & strtoul
    	size_t len = 0;		// initialize len pointer for getline()
    	ssize_t nread;		// initialize nread for getline() loop
-   	unsigned int i = 0;	// initialize counter j for sphere data loop
+   	size_t i = 0;		// initialize counter j for sphere data loop
 
    	// Sphere data loop
 	while ((nread = getline(&line, &len, f_spheres)) != -1) {
@@ -38,7 +38,7 @@ void read_spheres(sphere *spheres, FILE *f_spheres) {
 	char *ptr;			// initialize endchar: ptr for strtod & strtoul
    	size_t len = 0;		// initialize len pointer for getline()
    	ssize_t nread;		// initialize nread for getline() loops
-   	unsigned int j = 0;	// initialize counter j for sphere array loop
+   	size_t j = 0;		// initialize counter j for sphere array loop
    	double coords[3];	// make empty array for sphere coordinates
 
    	// Sphere coordinate loop

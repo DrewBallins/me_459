@@ -8,7 +8,7 @@
 
 int main() {
 
-	unsigned int num_t;					// initialize int for number of triangles
+	size_t num_t;						// initialize int for number of triangles
 	unsigned long int num_s;			// pointer to number of spheres
 	double r;							// radius of sphere
 	FILE *f_mesh;						// cast file mesh.input
@@ -40,5 +40,6 @@ int main() {
 
 	free(mesh);							// free mesh dynamic memory
 	free(spheres);						// free sphere dynamic memory
+
     return 0;
 }
