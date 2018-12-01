@@ -5,6 +5,7 @@
 
 #include "mesh.h"
 #include "spheres.h"
+#include "collide.h"
 
 int main() {
 
