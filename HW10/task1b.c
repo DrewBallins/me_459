@@ -11,7 +11,7 @@ int main() {
 
 	// display these two values
 	printf("Minimum value int = %d\n", sz);
-	printf("Minimum value int + 1 = %d\n", sz2);
+	printf("Minimum value int - 1 = %d\n", sz2);
 
 	return 0;
 }
