@@ -3,11 +3,11 @@
    Due: 12/09/2018 */
 #include <stdlib.h>
 #include <stdio.h>
-#include <math.h>
+#include <limits.h>
 
 int main() {
-	int sz = -(pow(2, 31)-1)-1;	// minimum value int that can be stored
-	int sz2 = sz - 1;			// 1 value smaller than min value int
+	int sz = INT_MIN;	// minimum value int that can be stored
+	int sz2 = sz - 1;	// 1 value smaller than min value int
 
 	// display these two values
 	printf("Minimum value int = %d\n", sz);
