@@ -1,5 +1,4 @@
 /* Author: Andrew Wild */
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
