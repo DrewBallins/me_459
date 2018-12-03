@@ -5,3 +5,6 @@ project(HW10)
 add_executable(task1a task1a.c)
 add_executable(task1b task1b.c)
 add_executable(task3 task3.c)
+
+# Set compiler flags
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -lm")
