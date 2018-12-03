@@ -43,7 +43,7 @@ int main() {
 	}
 
 	double pi_est = 2*l*n/(t*h);			// calculate estimate of PI
-	printf("Estimate of PI = %lf", pi_est);	// display estimate of PI
+	printf("Estimate of PI = %lf\n", pi_est);	// display estimate of PI
 
 	return 0;
 }
