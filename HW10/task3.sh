@@ -8,7 +8,7 @@
 #SBATCH --job-name=HW10_task3
 #SBATCH --partition=slurm_shortgpu
 #SBATCH --ntasks=1 --cpus-per-task=1
-#SBATCH --time=0-00:00:10
+#SBATCH --time=0-00:00:30
 #SBATCH --output="task3_output-%j.txt"
 
 cd $SLURM_SUBMIT_DIR
