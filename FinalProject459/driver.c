@@ -12,6 +12,7 @@ int main() {
 	size_t num_t;						// initialize int for number of triangles
 	unsigned long int num_s;			// pointer to number of spheres
 	double r;							// radius of sphere
+	size_t n_collisions;					// number of collisions
 	FILE *f_mesh;						// cast file mesh.input
 	FILE *f_spheres;					// cast file spheres.input
 
@@ -38,6 +39,10 @@ int main() {
 	/*
 	Call collision function and then output function
 	*/
+
+	n_collisions = collide_all(r, spheres, mesh, num_s, num_t);
+	printf("Number of collisions = %d", n_collisions);
+
 
 	free(mesh);							// free mesh dynamic memory
 	free(spheres);						// free sphere dynamic memory
