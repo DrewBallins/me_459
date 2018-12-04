@@ -12,12 +12,13 @@
 // ie Returns |{ {i,j}: i != j && sphere_i has non-negative overlap with triangle_i}|
 size_t collide_all(double r, sphere* spheres, triangle* mesh, unsigned long int num_s, size_t num_t) {
 	size_t n_collisions = 0;	// Declare and intialize number of collisions
+	size_t k = 0;				// initialize counter to prevent double collision detection
 	vector E1;					// initialize triangle edge 1
 	vector E2;					// initialize triangle edge 2
 	vector k_diff;				// initialize distance from sphere center to known point on triangle plane
 	vector norm;				// initialize normal vector from triangle plane
-	double dist 				// initialize ???
-	double ndot;				// initialize ???
+	double dist; 				// initialize dist dot product
+	double ndot;				// initialize normal vector dot product
 
 
 	/* 
@@ -59,9 +60,11 @@ size_t collide_all(double r, sphere* spheres, triangle* mesh, unsigned long int 
 			// NOTE: avoided division (dist*dist/ndot) to make code faster
 			if ((dist*dist) < (r*r*ndot)) {
 				// run further tests to determine whether closest point is actually contained
-				// in triangle, or within edge of triangle
+				// in triangle, or within edge of triangle. For now, I just add 1 to n_collisions
+				n_collisions += 1;
 			}
 		}
+		k += 1;
 	}
 
 	return n_collisions;
