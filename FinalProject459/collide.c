@@ -10,7 +10,7 @@
 // Returns the number of distinct pairs of collisions between distinct spheres 
 // (all of radius r) and distinct triangles in the mesh
 // ie Returns |{ {i,j}: i != j && sphere_i has non-negative overlap with triangle_i}|
-size_t collide_all(double r, sphere* spheres, triangle* mesh, unsigned long int num_s, size_t num_t) {
+size_t collide_all(double r, sphere* spheres, triangle* mesh, pair* pairs, unsigned long int num_s, size_t num_t) {
 	size_t n_collisions = 0;	// Declare and intialize number of collisions
 	vector E1;					// initialize triangle edge 1
 	vector E2;					// initialize triangle edge 2
@@ -60,6 +60,8 @@ size_t collide_all(double r, sphere* spheres, triangle* mesh, unsigned long int 
 			if ((dist*dist) < (r*r*ndot)) {
 				// run further tests to determine whether closest point is actually contained
 				// in triangle, or within edge of triangle. For now, I just add 1 to n_collisions
+				pairs[n_collisions].s = i;
+				pairs[n_collisions].t = j;
 				n_collisions += 1;
 			}
 		}
