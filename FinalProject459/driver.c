@@ -36,16 +36,22 @@ int main() {
 
 	fclose(f_spheres);					// close spheres.input.csv file
 
+	pair *pairs = malloc(sizeof(pair) * num_t*num_s);	// dynamically allocate memory for collision pairs array
+
 	/*
 	Call collision function and then output function
 	*/
 
-	n_collisions = collide_all(r, spheres, mesh, num_s, num_t);
-	printf("Number of collisions = %d", n_collisions);
+	n_collisions = collide_all(r, spheres, mesh, pairs, num_s, num_t);
+	printf("Number of collisions = %d\n", n_collisions);
+	printf("Collision pair 0 = %d, %d\n", pairs[0].s, pairs[0].t);
+	printf("Collision pair 1 = %d, %d\n", pairs[1].s, pairs[1].t);
+	printf("Collision pair 2 = %d, %d\n", pairs[2].s, pairs[2].t);
 
 
 	free(mesh);							// free mesh dynamic memory
 	free(spheres);						// free sphere dynamic memory
+	free(pairs);						// free collision pairs memory
 
     return 0;
 }
