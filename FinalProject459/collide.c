@@ -40,9 +40,9 @@ size_t collide_all(double r, sphere* spheres, triangle* mesh, unsigned long int 
 			E2.z = (mesh[j].z3 - mesh[j].z1);
 
 			// define distance from sphere center to given triangle plane point (arbitrarily chose triangle vertex 1)
-			k_diff.x = (mesh[j].x1 - spheres[i].x);
-			k_diff.y = (mesh[j].y1 - spheres[i].y);
-			k_diff.z = (mesh[j].z1 - spheres[i].z);
+			k_diff.x = (spheres[i].x - mesh[j].x1);
+			k_diff.y = (spheres[i].y - mesh[j].y1);
+			k_diff.z = (spheres[i].z - mesh[j].z1);
 			
 			// normal vector from plane norm = E1 x E2 (cross product)
 			norm.x = E1.y*E2.z - E2.y*E1.z;
