@@ -14,7 +14,7 @@ size_t collide_all(double r, sphere* spheres, triangle* mesh, pair* pairs, unsig
 	size_t n_collisions = 0;	// Declare and intialize number of collisions
 	vector E1;					// initialize triangle edge 1
 	vector E2;					// initialize triangle edge 2
-	vector k_diff;				// initialize distance from sphere center to known point on triangle plane
+	vector s_dist;				// initialize distance from sphere center to known point on triangle plane
 	vector norm;				// initialize normal vector from triangle plane
 	double dist; 				// initialize dist dot product
 	double ndot;				// initialize normal vector dot product
@@ -40,17 +40,17 @@ size_t collide_all(double r, sphere* spheres, triangle* mesh, pair* pairs, unsig
 			E2.z = (mesh[j].z3 - mesh[j].z1);
 
 			// define distance from sphere center to given triangle plane point (arbitrarily chose triangle vertex 1)
-			k_diff.x = (spheres[i].x - mesh[j].x1);
-			k_diff.y = (spheres[i].y - mesh[j].y1);
-			k_diff.z = (spheres[i].z - mesh[j].z1);
+			s_dist.x = (spheres[i].x - mesh[j].x1);
+			s_dist.y = (spheres[i].y - mesh[j].y1);
+			s_dist.z = (spheres[i].z - mesh[j].z1);
 			
 			// normal vector from plane norm = E1 x E2 (cross product)
 			norm.x = E1.y*E2.z - E2.y*E1.z;
 			norm.y = E2.x*E1.z - E1.x*E2.z;
 			norm.z = E1.x*E2.y - E2.x*E1.y;
 
-			// dist = norm * k_diff (dot product)
-			dist = norm.x*k_diff.x + norm.y*k_diff.y + norm.z*k_diff.z;
+			// dist = norm * s_dist (dot product)
+			dist = norm.x*s_dist.x + norm.y*s_dist.y + norm.z*s_dist.z;
 
 			// ndot = norm * norm (dot product)
 			ndot = norm.x*norm.x + norm.y*norm.y + norm.z*norm.z;
@@ -60,9 +60,12 @@ size_t collide_all(double r, sphere* spheres, triangle* mesh, pair* pairs, unsig
 			if ((dist*dist) < (r*r*ndot)) {
 				// run further tests to determine whether closest point is actually contained
 				// in triangle, or within edge of triangle. For now, I just add 1 to n_collisions
-				pairs[n_collisions].s = i;
-				pairs[n_collisions].t = j;
 				n_collisions += 1;
+				/*if (n_collisions > num_s) {
+					pairs = realloc(pairs, sizeof(pair)*n_collisions);
+				}*/
+				pairs[n_collisions-1].s = i;
+				pairs[n_collisions-1].t = j;
 			}
 		}
 	}
