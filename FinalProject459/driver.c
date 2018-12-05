@@ -36,7 +36,7 @@ int main() {
 
 	fclose(f_spheres);					// close spheres.input.csv file
 
-	pair *pairs = malloc(sizeof(pair) * num_t*num_s);	// dynamically allocate memory for collision pairs array
+	pair *pairs = malloc(sizeof(pair) * num_s);	// Initialize pairs array, will realloc inside collide_all function
 
 	/*
 	Call collision function and then output function
