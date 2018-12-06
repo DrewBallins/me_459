@@ -16,6 +16,9 @@ size_t collide_all(double r, sphere* spheres, triangle* mesh, pair* pairs, unsig
 	vector E2;					// initialize triangle edge 2
 	vector s_dist;				// initialize distance from sphere center to known point on triangle plane
 	vector norm;				// initialize normal vector from triangle plane
+	double gamma;
+	double beta;
+	double alpha;
 	double dist; 				// initialize dist dot product
 	double ndot;				// initialize normal vector dot product
 
@@ -64,8 +67,19 @@ size_t collide_all(double r, sphere* spheres, triangle* mesh, pair* pairs, unsig
 				/*if (n_collisions > num_s) {
 					pairs = realloc(pairs, sizeof(pair)*n_collisions);
 				}*/
-				pairs[n_collisions-1].s = i;
-				pairs[n_collisions-1].t = j;
+
+				gamma = (((E1.y*s_dist.z - s_dist.y*E1.z)*norm.x) + ((s_dist.x*E1.z - E1.x*s_dist.z)*norm.y) + ((E1.x*s_dist.y - s_dist.x*E1.y)*norm.z))/ndot;
+				beta = (((s_dist.y*E2.z - E2.y*s_dist.z)*norm.x) + ((E2.x*s_dist.z - s_dist.x*E2.z)*norm.y) + ((s_dist.x*E2.y - E2.x*s_dist.y)*norm.z))/ndot;
+				alpha = 1 - gamma - beta;
+
+				if (0 <= alpha && alpha <= 1 && 0 <= beta && beta <= 1 && 0 <= gamma && gamma <= 1) {
+					n_collisions += 1;
+					/*if (n_collisions > num_s) {
+					pairs = realloc(pairs, sizeof(pair)*n_collisions);
+					}*/
+					pairs[n_collisions-1].s = i;
+					pairs[n_collisions-1].t = j;
+				}
 			}
 		}
 	}
