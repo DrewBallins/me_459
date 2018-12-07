@@ -32,6 +32,12 @@ size_t collide_all(double r, sphere* spheres, triangle* mesh, pair* pairs, unsig
 	double E1sdot; 				// initialize E1s*E1s
 	double E2sdot; 				// initialize E2s*E2s
 	double E3sdot; 				// initialize E3s*E3s
+	double t_star1;				// initialize barycentric multiplier t*
+	double t_star2;				// initialize barycentric multiplier t*
+	double t_star3;				// initialize barycentric multiplier t*
+	vector Etstar[3];
+	vector Et_dist[3];
+	double Etd_dot[3];
 
 
 	/* 
@@ -113,7 +119,21 @@ size_t collide_all(double r, sphere* spheres, triangle* mesh, pair* pairs, unsig
 				alpha = 1 - gamma - beta;
 
 				// First check whether or not any edge intersects sphere
-				if (E1sdot < (r*r*E1dot) || E2sdot < (r*r*E2dot) || E3sdot < (r*r*E3dot)) {
+				t_star1 = (E1sdot/E1dot > 0 ? E1sdot/E1dot : 0) < 1 ? (E1sdot/E1dot > 0 ? E1sdot/E1dot : 0) : 1;
+				t_star2 = (E2sdot/E2dot > 0 ? E2sdot/E2dot : 0) < 1 ? (E2sdot/E2dot > 0 ? E2sdot/E2dot : 0) : 1;
+				t_star3 = (E3sdot/E3dot > 0 ? E3sdot/E3dot : 0) < 1 ? (E3sdot/E3dot > 0 ? E3sdot/E3dot : 0) : 1;
+
+				for (size_t m = 0; m < 3; m++) {
+					Etstar[m].x = mesh[j].x1 + t_star1*E1.x;
+					Etstar[m].y = mesh[j].y1 + t_star1*E1.y;
+					Etstar[m].z = mesh[j].z1 + t_star1*E1.z;
+					Et_dist[m].x = Etstar[m].x - spheres[i].x;
+					Et_dist[m].y = Etstar[m].y - spheres[i].y;
+					Et_dist[m].z = Etstar[m].z - spheres[i].z;
+					Etd_dot[m] = Et_dist[m].x*Et_dist[m].x + Et_dist[m].y*Et_dist[m].y + Et_dist[m].z*Et_dist[m].z;
+				}
+				
+				if (Etd_dot[0] < (r*r) || Etd_dot[1] < (r*r) || Etd_dot[2] < (r*r)) {
 					n_collisions += 1;
 					/*if (n_collisions > num_s) {
 						pairs = realloc(pairs, sizeof(pair)*n_collisions);
@@ -121,6 +141,7 @@ size_t collide_all(double r, sphere* spheres, triangle* mesh, pair* pairs, unsig
 					pairs[n_collisions-1].s = i;
 					pairs[n_collisions-1].t = j; 
 				}
+
 				else if (0 <= alpha && alpha <= 1 && 0 <= beta && beta <= 1 && 0 <= gamma && gamma <= 1) {
 					n_collisions += 1;
 					/*if (n_collisions > num_s) {
