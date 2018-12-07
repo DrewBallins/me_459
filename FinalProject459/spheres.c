@@ -57,6 +57,5 @@ void read_spheres(sphere *spheres, FILE *f_spheres) {
    		spheres[j].z = coords[2];	// save z coordinate of sphere j
 		j += 1;
 	}
-
 	free(line);			// free allocated line pointer
 }

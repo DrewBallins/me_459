@@ -13,5 +13,4 @@ void data_out(pair *p, size_t n, FILE *f) {
 	for (size_t k = 0; k < n; k++) {
 		fprintf(f, "%d,%d\n", p[k].s, p[k].t);
 	}
-
 }

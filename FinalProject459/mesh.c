@@ -70,6 +70,5 @@ void read_mesh(triangle *mesh, FILE *f_mesh) {
 			i += 1;
 		}
 	}
-
 	free(line);
 }
