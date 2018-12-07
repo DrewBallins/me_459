@@ -12,7 +12,7 @@ int main() {
 	size_t num_t;						// initialize int for number of triangles
 	unsigned long int num_s;			// pointer to number of spheres
 	double r;							// radius of sphere
-	size_t n_collisions;					// number of collisions
+	size_t n_collisions;				// number of collisions
 	FILE *f_mesh;						// cast file mesh.input
 	FILE *f_spheres;					// cast file spheres.input
 
@@ -38,15 +38,19 @@ int main() {
 
 	pair *pairs = malloc(sizeof(pair) * num_s);	// Initialize pairs array, will realloc inside collide_all function
 
-	/*
-	Call collision function and then output function
-	*/
+	clock_t start = clock();			// begin timing clock
 
-	n_collisions = collide_all(r, spheres, mesh, pairs, num_s, num_t);
+	n_collisions = collide_all(r, spheres, mesh, pairs, num_s, num_t);	// call collision function
+
+	clock_t end = clock();				// end timing clock
+	double total_time = ((double)(end - start)) / CLOCKS_PER_SEC;		// calculate time passed
+
+	printf("Total time: %0.8f\n", total_time);
 	printf("Number of collisions = %d\n", n_collisions);
-	printf("Collision pair 0 = %d, %d\n", pairs[0].s, pairs[0].t);
-	printf("Collision pair 1 = %d, %d\n", pairs[1].s, pairs[1].t);
-	printf("Collision pair 2 = %d, %d\n", pairs[2].s, pairs[2].t);
+
+	for (size_t idx = 0; idx < n_collisions; idx++) {
+		printf("Collision pair %d = %d, %d\n", idx+1, pairs[idx].s, pairs[idx].t);
+	}
 
 
 	free(mesh);							// free mesh dynamic memory
