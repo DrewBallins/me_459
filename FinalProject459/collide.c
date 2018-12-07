@@ -1,4 +1,9 @@
-/* Author: Andrew Wild */
+/* Author: Andrew Wild 
+we need to first check whether the distance from the sphere center to the closest point in the
+plane which contains a specific triangle is less than the radius of the sphere. If it is, then 
+a collision is possible, and we then need to check whether this closest point is contained in 
+the triangle, if it is then there IS an intersection. Finally we must test to see if any edge 
+of the triangle intersects the sphere. */
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
@@ -13,11 +18,11 @@
 size_t collide_all(double r, sphere* spheres, triangle* mesh, pair* pairs, unsigned long int num_s, size_t num_t) {
 	size_t n_collisions = 0;	// Declare and intialize number of collisions
 	vector E1;					// initialize triangle edge 1
-	vector E1s;
+	vector E1s;					// initialize triangle edge 1 cross product
 	vector E2;					// initialize triangle edge 2
-	vector E2s;
+	vector E2s;					// initialize triangle edge 2 cross product
 	vector E3;					// initialize triangle edge 3
-	vector E3s;
+	vector E3s;					// initialize triangle edge 3 cross product
 	vector s_dist;				// initialize distance from sphere center to triangle vertex 1
 	vector s_dist2;				// initialize distance from sphere center to triangle vertex 2
 	vector norm;				// initialize normal vector from triangle plane
@@ -39,16 +44,7 @@ size_t collide_all(double r, sphere* spheres, triangle* mesh, pair* pairs, unsig
 	vector Et_dist[3];
 	double Etd_dot[3];
 
-
-	/* 
-	we need to first check whether the distance from the sphere center to the closest point in the
-	plane which contains a specific triangle is less than the radius of the sphere. If it is, then 
-	a collision is possible, and we then need to check whether this closest point is contained in 
-	the triangle, if it is then there IS an intersection. Finally we must test to see if any edge 
-	of the triangle intersects the sphere.
-	*/
-
-
+	// iterate through all spheres and triangles
 	for(size_t i=0; i < num_s; i++) {
 		for(size_t j=0; j < num_t; j++) {
 			// define edges E1 & E2 of triangle to define triangle plane
@@ -79,7 +75,7 @@ size_t collide_all(double r, sphere* spheres, triangle* mesh, pair* pairs, unsig
 			// NOTE: avoided division (dist*dist/ndot) to make code faster
 			if ((dist*dist) < (r*r*ndot)) {
 				/* run further tests to determine whether closest point is actually contained
-				in triangle, or within edge of triangle. For now, I just add 1 to n_collisions*/
+				in triangle, or within edge of triangle. */
 				// define edge 3 of the triangle
 				E3.x = (mesh[j].x3 - mesh[j].x2);
 				E3.y = (mesh[j].y3 - mesh[j].y2);
@@ -153,6 +149,5 @@ size_t collide_all(double r, sphere* spheres, triangle* mesh, pair* pairs, unsig
 			}
 		}
 	}
-
 	return n_collisions;
 }
