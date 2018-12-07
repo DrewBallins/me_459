@@ -13,14 +13,25 @@
 size_t collide_all(double r, sphere* spheres, triangle* mesh, pair* pairs, unsigned long int num_s, size_t num_t) {
 	size_t n_collisions = 0;	// Declare and intialize number of collisions
 	vector E1;					// initialize triangle edge 1
+	vector E1s;
 	vector E2;					// initialize triangle edge 2
-	vector s_dist;				// initialize distance from sphere center to known point on triangle plane
+	vector E2s;
+	vector E3;					// initialize triangle edge 3
+	vector E3s;
+	vector s_dist;				// initialize distance from sphere center to triangle vertex 1
+	vector s_dist2;				// initialize distance from sphere center to triangle vertex 2
 	vector norm;				// initialize normal vector from triangle plane
-	double gamma;
-	double beta;
-	double alpha;
+	double gamma;				// initialize barycentric coordinate gamma
+	double beta;				// initialize barycentric coordinate beta
+	double alpha;				// initialize barycentric coordinate alpha
 	double dist; 				// initialize dist dot product
 	double ndot;				// initialize normal vector dot product
+	double E1dot; 				// initialize E1*E1
+	double E2dot; 				// initialize E2*E2
+	double E3dot; 				// initialize E3*E3
+	double E1sdot; 				// initialize E1s*E1s
+	double E2sdot; 				// initialize E2s*E2s
+	double E3sdot; 				// initialize E3s*E3s
 
 
 	/* 
@@ -61,21 +72,59 @@ size_t collide_all(double r, sphere* spheres, triangle* mesh, pair* pairs, unsig
 			// test if collision is possible by checking point to plane distance
 			// NOTE: avoided division (dist*dist/ndot) to make code faster
 			if ((dist*dist) < (r*r*ndot)) {
-				// run further tests to determine whether closest point is actually contained
-				// in triangle, or within edge of triangle. For now, I just add 1 to n_collisions
-				n_collisions += 1;
-				/*if (n_collisions > num_s) {
-					pairs = realloc(pairs, sizeof(pair)*n_collisions);
-				}*/
+				/* run further tests to determine whether closest point is actually contained
+				in triangle, or within edge of triangle. For now, I just add 1 to n_collisions*/
+				// define edge 3 of the triangle
+				E3.x = (mesh[j].x3 - mesh[j].x2);
+				E3.y = (mesh[j].y3 - mesh[j].y2);
+				E3.z = (mesh[j].z3 - mesh[j].z2);
 
-				gamma = (((E1.y*s_dist.z - s_dist.y*E1.z)*norm.x) + ((s_dist.x*E1.z - E1.x*s_dist.z)*norm.y) + ((E1.x*s_dist.y - s_dist.x*E1.y)*norm.z))/ndot;
-				beta = (((s_dist.y*E2.z - E2.y*s_dist.z)*norm.x) + ((E2.x*s_dist.z - s_dist.x*E2.z)*norm.y) + ((s_dist.x*E2.y - E2.x*s_dist.y)*norm.z))/ndot;
+				// define distance from sphere center to vertex 2 of the triangle
+				s_dist2.x = (spheres[i].x - mesh[j].x2);
+				s_dist2.y = (spheres[i].y - mesh[j].y2);
+				s_dist2.z = (spheres[i].z - mesh[j].z2);
+
+				// cross product of edge 1 and sphere to vertex one distance
+				E1s.x = E1.y*s_dist.z - s_dist.y*E1.z;
+				E1s.y = s_dist.x*E1.z - E1.x*s_dist.z;
+				E1s.z = E1.x*s_dist.y - s_dist.x*E1.y;
+
+				// cross product of sphere to vertex one distance and edge 2
+				E2s.x = s_dist.y*E2.z - E2.y*s_dist.z;
+				E2s.y = E2.x*s_dist.z - s_dist.x*E2.z;
+				E2s.z = s_dist.x*E2.y - E2.x*s_dist.y;
+
+				// cross product of edge 3 and sphere to vertex two distance
+				E3s.x = E3.y*s_dist2.z - s_dist2.y*E3.z;
+				E3s.y = s_dist2.x*E3.z - E3.x*s_dist2.z;
+				E3s.z = E3.x*s_dist2.y - s_dist2.x*E3.y;
+
+				// define all dot products
+				E1dot = E1.x*E1.x + E1.y*E1.y + E1.z*E1.z;
+				E2dot = E2.x*E2.x + E2.y*E2.y + E2.z*E2.z;
+				E3dot = E3.x*E3.x + E3.y*E3.y + E3.z*E3.z;
+				E1sdot = E1s.x*E1s.x + E1s.y*E1s.y + E1s.z*E1s.z;
+				E2sdot = E2s.x*E2s.x + E2s.y*E2s.y + E2s.z*E2s.z;
+				E3sdot = E3s.x*E3s.x + E3s.y*E3s.y + E3s.z*E3s.z;
+
+				// calculate barycentric coordinates of triangle 
+				gamma = (((E1s.x)*norm.x) + ((E1s.y)*norm.y) + ((E1s.z)*norm.z))/ndot;
+				beta = (((E2s.x)*norm.x) + ((E2s.y)*norm.y) + ((E2s.z)*norm.z))/ndot;
 				alpha = 1 - gamma - beta;
 
-				if (0 <= alpha && alpha <= 1 && 0 <= beta && beta <= 1 && 0 <= gamma && gamma <= 1) {
+				// First check whether or not any edge intersects sphere
+				if (E1sdot < (r*r*E1dot) || E2sdot < (r*r*E2dot) || E3sdot < (r*r*E3dot)) {
 					n_collisions += 1;
 					/*if (n_collisions > num_s) {
-					pairs = realloc(pairs, sizeof(pair)*n_collisions);
+						pairs = realloc(pairs, sizeof(pair)*n_collisions);
+					}*/
+					pairs[n_collisions-1].s = i;
+					pairs[n_collisions-1].t = j; 
+				}
+				else if (0 <= alpha && alpha <= 1 && 0 <= beta && beta <= 1 && 0 <= gamma && gamma <= 1) {
+					n_collisions += 1;
+					/*if (n_collisions > num_s) {
+						pairs = realloc(pairs, sizeof(pair)*n_collisions);
 					}*/
 					pairs[n_collisions-1].s = i;
 					pairs[n_collisions-1].t = j;
