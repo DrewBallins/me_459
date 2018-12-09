@@ -1,11 +1,13 @@
-/*Author: Andrew Wild*/
+/*! \author Andrew Wild 
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
 #include "spheres.h"
 
-// Reads spheres.input.csv file for radius and num spheres
+/*! Reads spheres.input.csv file for radius and num spheres*/
 void read_sphere_data(FILE *f_spheres, double *r, unsigned long int *num_s) {
 	char *line = NULL;	// intialize line pointer for getline()
 	char *ptr;			// initialize endchar: ptr for strtod & strtoul
@@ -28,11 +30,10 @@ void read_sphere_data(FILE *f_spheres, double *r, unsigned long int *num_s) {
 	   		break;		// break loop, read rest of file in next loop
 		}
 	}
-
 	free(line);			// free allocated line pointer
 }
 
-// Reads rest of spheres file and saves all sphere coordinates in array
+/*! Reads rest of spheres file and saves all sphere coordinates in array*/
 void read_spheres(sphere *spheres, FILE *f_spheres) {
    	char *line = NULL;	// intialize line pointer for getline()
 	char *ptr;			// initialize endchar: ptr for strtod & strtoul

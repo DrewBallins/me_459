@@ -1,11 +1,13 @@
-/*Author: Andrew Wild*/
+/*! \author Andrew Wild 
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
 #include "mesh.h"
 
-// Reads mesh.input file and saves all triangles in mesh array
+/*! Reads mesh.input file and saves all triangles in mesh array*/
 void read_mesh(triangle *mesh, FILE *f_mesh) {
 	char *line = NULL;	// intialize line pointer for getline()
 	char *ptr;			// initialize endchar: ptr for strtod & strtoul

@@ -1,9 +1,6 @@
-/* Author: Andrew Wild 
-we need to first check whether the distance from the sphere center to the closest point in the
-plane which contains a specific triangle is less than the radius of the sphere. If it is, then 
-a collision is possible, and we then need to check whether this closest point is contained in 
-the triangle, if it is then there IS an intersection. Finally we must test to see if any edge 
-of the triangle intersects the sphere. */
+/*! \author Andrew Wild 
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
@@ -12,9 +9,14 @@ of the triangle intersects the sphere. */
 #include "mesh.h"
 #include "spheres.h"
 
-// Returns the number of distinct pairs of collisions between distinct spheres 
-// (all of radius r) and distinct triangles in the mesh
-// ie Returns |{ {i,j}: i != j && sphere_i has non-negative overlap with triangle_i}|
+/*! Returns the number of sphere-triangle collisions, and saves the ID's of every collided pair in the order they were read in 
+ *
+ * This code works by first checking whether the distance from the sphere center to the closest point in the
+ * plane which contains a specific triangle is less than the radius of the sphere. If it is, then 
+ * a collision is possible, and we then need to check whether this closest point is contained in 
+ * the triangle, if it is then there IS an intersection. Finally we must test to see if any edge 
+ * of the triangle intersects the sphere.
+*/
 size_t collide_all(double r, sphere* spheres, triangle* mesh, pair* pairs, unsigned long int num_s, size_t num_t) {
 	size_t n_collisions = 0;	// Declare and intialize number of collisions
 	vector E1;					// initialize triangle edge 1

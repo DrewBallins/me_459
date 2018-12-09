@@ -1,4 +1,6 @@
-/*Author: Andrew Wild*/
+/*! \author Andrew Wild 
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -8,6 +10,13 @@
 #include "collide.h"
 #include "output.h"
 
+/*! Main program calls the necessary functions along with other operations
+ *
+ * This program first initializes the necessary variables, then reads in the
+ * mesh using read_mesh(), followed by the spheres using first read_sphere_data()
+ * followed by read_spheres(). The collide_all() function is called and timed
+ * for collision detection, followed by finally calling the data_out() function.
+ */
 int main() {
 	size_t num_t;						// initialize int for number of triangles
 	unsigned long int num_s;			// pointer to number of spheres

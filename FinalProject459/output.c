@@ -1,11 +1,13 @@
-/*Author: Andrew Wild*/
+/*! \author Andrew Wild 
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 
 #include "output.h"
 #include "collide.h"
 
-// Outputs sphere-triangle collision pairs
+/*! Outputs sphere-triangle collision pairs */
 void data_out(pair *p, size_t n, FILE *f) {
 	fprintf(f, "s,t\n");				// print first line of file
 
