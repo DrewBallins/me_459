@@ -51,11 +51,8 @@ int main() {
 	double total_time = ((double)(end - start)) / CLOCKS_PER_SEC * s2ms;
 
 	// print results
-	printf("Total time: %0.8f\n", total_time);
+	printf("Total time [ms]: %0.8f\n", total_time);
 	printf("Number of collisions = %d\n", n_collisions);
-	for (size_t idx = 0; idx < n_collisions; idx++) {
-		printf("Collision pair %d = %d,%d\n", idx+1, pairs[idx].s, pairs[idx].t);
-	}
 
 	// Create collision_detection.out file, write to file w/ data_out and finally close file
 	f_out = fopen("collision_detection.out","w");
