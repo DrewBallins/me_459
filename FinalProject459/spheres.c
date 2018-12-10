@@ -7,7 +7,13 @@
 
 #include "spheres.h"
 
-/*! Reads spheres.input.csv file for radius and num spheres*/
+/*! Reads spheres.input file for radius and num spheres
+ *
+ * This function takes the already opened spheres.input CSV file, 
+ * a pointer to radius value r and a pointer to the number of spheres
+ * num_s. It reads the first 3 lines of the spheres.input file and
+ * saves the radius value to r and the number of spheres value to num_s
+*/
 void read_sphere_data(FILE *f_spheres, double *r, unsigned long int *num_s) {
 	char *line = NULL;	// intialize line pointer for getline()
 	char *ptr;			// initialize endchar: ptr for strtod & strtoul
@@ -33,7 +39,13 @@ void read_sphere_data(FILE *f_spheres, double *r, unsigned long int *num_s) {
 	free(line);			// free allocated line pointer
 }
 
-/*! Reads rest of spheres file and saves all sphere coordinates in array*/
+/*! Reads rest of spheres file and saves all sphere coordinates in array
+ *
+ * This function takes the dynamically allocated array of sphere center points
+ * 'spheres' and the opened spheres.input file as input and scans the rest of
+ * the file for all sphere center points coordinates. These coordinates are
+ * saved in the 'spheres' array in the order they were read in.
+*/
 void read_spheres(sphere *spheres, FILE *f_spheres) {
    	char *line = NULL;	// intialize line pointer for getline()
 	char *ptr;			// initialize endchar: ptr for strtod & strtoul

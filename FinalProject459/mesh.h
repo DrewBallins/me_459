@@ -21,7 +21,13 @@ typedef struct triangle {
     double z3;
 } triangle;
 
-/*! Reads mesh.input file and saves all triangles in mesh array*/
+/*! Reads mesh.input file and saves all triangles in mesh array
+ *
+ * This function takes the opened mesh.input file and the array of
+ * triangles called 'mesh' as inputs. It scans every line of the 
+ * mesh.input file and populates the 'mesh' array with the coordinates
+ * of each triangle vertex for every triangle in the mesh.
+*/
 void read_mesh(triangle *mesh, FILE *f_mesh);
 
 #endif
