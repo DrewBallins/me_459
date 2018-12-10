@@ -33,12 +33,12 @@ int main() {
 	read_mesh(mesh, f_mesh);			
 	fclose(f_mesh);
 
-	// open spheres.input.csv file for reading
-	f_spheres = fopen("spheres.input.csv","r");
+	// open spheres.input file for reading
+	f_spheres = fopen("spheres.input","r");
 	read_sphere_data(f_spheres, &r, &num_s);			// call function to find r & num_s from file
 	sphere *spheres = malloc(sizeof(sphere) * num_s);	// dynamically allocate memory for spheres
 
-	// call function to read spheres.input.csv and populate spheres array of sphere coordinates
+	// call function to read spheres.input and populate spheres array of sphere coordinates
 	read_spheres(spheres, f_spheres);
 	fclose(f_spheres);
 	pair *pairs = malloc(sizeof(pair) * num_s);			// Initialize pairs array, will realloc inside collide_all function if needed
