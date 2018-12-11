@@ -41,7 +41,7 @@ int main() {
 	// call function to read spheres.input and populate spheres array of sphere coordinates
 	read_spheres(spheres, f_spheres);
 	fclose(f_spheres);
-	pair *pairs = malloc(sizeof(pair) * num_s);			// Initialize pairs array, will realloc inside collide_all function if needed
+	pair *pairs = malloc(sizeof(pair) * num_s * num_t);			// Initialize pairs array to max possible num collisions
 
 	// call collide function and time collisions
 	clock_t start = clock();
