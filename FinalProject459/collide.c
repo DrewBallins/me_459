@@ -133,18 +133,12 @@ size_t collide_all(double r, sphere* spheres, triangle* mesh, pair* pairs, unsig
 				
 				if (Etd_dot[0] < (r*r) || Etd_dot[1] < (r*r) || Etd_dot[2] < (r*r)) {
 					n_collisions += 1;
-					/*if (n_collisions > num_s) {
-						pairs = realloc(pairs, sizeof(pair)*n_collisions);
-					}*/
 					pairs[n_collisions-1].s = i;
 					pairs[n_collisions-1].t = j; 
 				}
 
 				else if (0 <= alpha && alpha <= 1 && 0 <= beta && beta <= 1 && 0 <= gamma && gamma <= 1) {
 					n_collisions += 1;
-					/*if (n_collisions > num_s) {
-						pairs = realloc(pairs, sizeof(pair)*n_collisions);
-					}*/
 					pairs[n_collisions-1].s = i;
 					pairs[n_collisions-1].t = j;
 				}
