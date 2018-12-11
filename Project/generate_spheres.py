@@ -13,9 +13,11 @@ radius = 3.2
 n_spheres = 100000
 coords = [0]*(3*n_spheres)
 
+# Generate random sphere center point coordinates in 3D space
 for i in range(3*n_spheres):
 	coords[i] = random.uniform(-100.0,100.0)
 
+# Write coordinates and data out to spheres.input file
 with open(output_file, 'w') as file: 
 	file.write("x,y,z\n")
 	file.write("{}\n".format(radius))
