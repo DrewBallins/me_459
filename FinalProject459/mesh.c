@@ -19,8 +19,8 @@ void read_mesh(triangle *mesh, FILE *f_mesh) {
 	char *ptr;			// initialize endchar: ptr for strtod & strtoul
    	size_t len = 0;		// initialize len pointer for getline()
    	ssize_t nread;		// initialize nread for getline() loops
-   	size_t i = 0;	// file line counter
-   	size_t j = 0;	// triangle ID counter
+   	size_t i = 0;		// file line counter
+   	size_t j = 0;		// triangle ID counter
    	double coords[3];	// temporary triangle coordinates array
 
    	// sphere coordinate reading loop
