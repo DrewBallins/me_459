@@ -43,6 +43,11 @@ int main() {
 	fclose(f_spheres);
 	pair *pairs = malloc(sizeof(pair) * num_s * num_t);			// Initialize pairs array to max possible num collisions
 
+	// check for proper memory allocation, if not succesful then allocate less memory (256 MB)
+	if (pairs == NULL) {
+		pairs = malloc(sizeof(pair) * 16000000);
+	}
+
 	// call collide function and time collisions
 	clock_t start = clock();
 	n_collisions = collide_all(r, spheres, mesh, pairs, num_s, num_t);
@@ -53,6 +58,7 @@ int main() {
 	// print results
 	printf("Total time [ms]: %0.8f\n", total_time);
 	printf("Number of collisions = %zu\n", n_collisions);
+	printf("Size of pairs = %zu\n", sizeof(pair));
 
 	// Create collision_detection.out file, write to file w/ data_out and finally close file
 	f_out = fopen("collision_detection.out","w");
