@@ -19,6 +19,6 @@ void data_out(pair *p, size_t n, FILE *f) {
 
 	// print sphere and triangle ID's of all collided pairs
 	for (size_t k = 0; k < n; k++) {
-		fprintf(f, "%d,%d\n", p[k].s, p[k].t);
+		fprintf(f, "%zu,%zu\n", p[k].s, p[k].t);
 	}
 }
