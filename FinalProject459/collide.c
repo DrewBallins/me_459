@@ -119,7 +119,7 @@ size_t collide_all(double r, sphere* spheres, triangle* mesh, pair* pairs, unsig
 				t_star[1] = (E2sdot/E2dot > 0 ? E2sdot/E2dot : 0) < 1 ? (E2sdot/E2dot > 0 ? E2sdot/E2dot : 0) : 1;
 				t_star[2] = (E3sdot/E3dot > 0 ? E3sdot/E3dot : 0) < 1 ? (E3sdot/E3dot > 0 ? E3sdot/E3dot : 0) : 1;
 
-				//
+				// Calculate distance squared between each triangle edge and sphere center
 				for (size_t m = 0; m < 3; m++) {
 					Etstar[m].x = mesh[j].x1 + t_star[m]*E1.x;
 					Etstar[m].y = mesh[j].y1 + t_star[m]*E1.y;
@@ -130,12 +130,14 @@ size_t collide_all(double r, sphere* spheres, triangle* mesh, pair* pairs, unsig
 					Etd_dot[m] = Et_dist[m].x*Et_dist[m].x + Et_dist[m].y*Et_dist[m].y + Et_dist[m].z*Et_dist[m].z;
 				}
 				
+				// check for edge collisions
 				if (Etd_dot[0] < (r*r) || Etd_dot[1] < (r*r) || Etd_dot[2] < (r*r)) {
 					n_collisions += 1;
 					pairs[n_collisions-1].s = i;
 					pairs[n_collisions-1].t = j; 
 				}
 
+				// check for surface collsions
 				else if (0 <= alpha && alpha <= 1 && 0 <= beta && beta <= 1 && 0 <= gamma && gamma <= 1) {
 					n_collisions += 1;
 					pairs[n_collisions-1].s = i;
