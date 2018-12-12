@@ -18,16 +18,6 @@ typedef struct vector {
     double z;
 } vector;
 
-//! Pair data structure containts sphere ID s and triangle ID t
-/*!
- * Contains size_t unsigned integers s, t which are the sphere ID
- * and the triangle ID, respectively
- */
-typedef struct pair {
-	size_t s;
-	size_t t;
-} pair;
-
 /*! Returns the number of sphere-triangle collisions, and saves the ID's of every collided pair in the order they were read in 
  *
  * This code works by first checking whether the distance from the sphere center to the closest point in the
@@ -36,6 +26,6 @@ typedef struct pair {
  * the triangle, if it is then there IS an intersection. Finally we must test to see if any edge 
  * of the triangle intersects the sphere.
 */
-size_t collide_all(double r, sphere* spheres, triangle* mesh, pair* pairs, unsigned long int num_s, size_t num_t);
+size_t collide_all(double r, sphere* spheres, triangle* mesh, unsigned long int num_s, size_t num_t, FILE *f);
 
 #endif

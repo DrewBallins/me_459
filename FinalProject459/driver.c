@@ -8,7 +8,6 @@
 #include "mesh.h"
 #include "spheres.h"
 #include "collide.h"
-#include "output.h"
 
 /*! Main program calls the necessary functions along with other operations
  *
@@ -41,34 +40,28 @@ int main() {
 	// call function to read spheres.input and populate spheres array of sphere coordinates
 	read_spheres(spheres, f_spheres);
 	fclose(f_spheres);
-	pair *pairs = malloc(sizeof(pair) * num_s * num_t);			// Initialize pairs array to max possible num collisions
 
-	// check for proper memory allocation, if not succesful then allocate less memory (256 MB)
-	if (pairs == NULL) {
-		pairs = malloc(sizeof(pair) * 16000000);
-	}
+	// Create collision_detection.out file and print first line
+	f_out = fopen("collision_detection.out","w");
+	fprintf(f_out, "s,t\n");
 
-	// call collide function and time collisions
+	// call collide function and time collision detection
 	clock_t start = clock();
-	n_collisions = collide_all(r, spheres, mesh, pairs, num_s, num_t);
+	n_collisions = collide_all(r, spheres, mesh, num_s, num_t, f_out);
 	clock_t end = clock();
 	const double s2ms = 1000.0;
 	double total_time = ((double)(end - start)) / CLOCKS_PER_SEC * s2ms;
 
+	// close output file
+	fclose(f_out);
+
 	// print results
 	printf("Total time [ms]: %0.8f\n", total_time);
 	printf("Number of collisions = %zu\n", n_collisions);
-	printf("Size of pairs = %zu\n", sizeof(pair));
-
-	// Create collision_detection.out file, write to file w/ data_out and finally close file
-	f_out = fopen("collision_detection.out","w");
-	data_out(pairs, n_collisions, f_out);
-	fclose(f_out);
 
 	// free all dynamically allocated memory
 	free(mesh);
 	free(spheres);
-	free(pairs);
 
     return 0;
 }
