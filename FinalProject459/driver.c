@@ -28,7 +28,7 @@ int main() {
 
 	// open mesh file for reading, allocate memory for mesh array then read in mesh using read_mesh file
 	f_mesh = fopen("mesh.input","r");
-	fscanf(f_mesh, "%d", &num_t);
+	fscanf(f_mesh, "%zu", &num_t);
 	triangle *mesh = malloc(sizeof(triangle) * num_t);
 	read_mesh(mesh, f_mesh);			
 	fclose(f_mesh);
@@ -52,7 +52,7 @@ int main() {
 
 	// print results
 	printf("Total time [ms]: %0.8f\n", total_time);
-	printf("Number of collisions = %d\n", n_collisions);
+	printf("Number of collisions = %zu\n", n_collisions);
 
 	// Create collision_detection.out file, write to file w/ data_out and finally close file
 	f_out = fopen("collision_detection.out","w");
