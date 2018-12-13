@@ -13,8 +13,8 @@
  *
  * This program first initializes the necessary variables, then reads in the
  * mesh using read_mesh(), followed by the spheres using first read_sphere_data()
- * followed by read_spheres(). The collide_all() function is called and timed
- * for collision detection, followed by finally calling the data_out() function.
+ * followed by read_spheres(). The collide_all() function is finally called and timed
+ * for collision detection and data output.
  */
 int main() {
 	size_t num_t;						// initialize int for number of triangles

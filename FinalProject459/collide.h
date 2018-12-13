@@ -18,13 +18,14 @@ typedef struct vector {
     double z;
 } vector;
 
-/*! Returns the number of sphere-triangle collisions, and saves the ID's of every collided pair in the order they were read in 
+/*! Returns the number of sphere-triangle collisions, and prints out the ID's of every collided pair in the order they were read in to file
  *
  * This code works by first checking whether the distance from the sphere center to the closest point in the
  * plane which contains a specific triangle is less than the radius of the sphere. If it is, then 
  * a collision is possible, and we then need to check whether this closest point is contained in 
  * the triangle, if it is then there IS an intersection. Finally we must test to see if any edge 
- * of the triangle intersects the sphere.
+ * of the triangle intersects the sphere. When an intersection is detected, the ID's of the sphere
+ * and triangle are printed out to the collision_detection.out file.
 */
 size_t collide_all(double r, sphere* spheres, triangle* mesh, unsigned long int num_s, size_t num_t, FILE *f);
 
